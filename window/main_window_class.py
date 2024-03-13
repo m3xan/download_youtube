@@ -19,12 +19,16 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
 from PySide6.QtWidgets import (QApplication, QGridLayout, QLabel, QLineEdit,
     QMainWindow, QMenu, QMenuBar, QPushButton,
     QSizePolicy, QWidget)
+from window import resource_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(499, 468)
+        MainWindow.resize(499, 396)
+        icon = QIcon()
+        icon.addFile(u":/icon/YouTube_full-color_icon__2017_.ico", QSize(), QIcon.Normal, QIcon.Off)
+        MainWindow.setWindowIcon(icon)
         self.action_path = QAction(MainWindow)
         self.action_path.setObjectName(u"action_path")
         self.centralwidget = QWidget(MainWindow)

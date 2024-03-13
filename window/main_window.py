@@ -7,15 +7,18 @@ from PIL import Image
 from PySide6.QtCore import Qt
 
 from window.main_window_class import Ui_MainWindow, QMainWindow, QPixmap
+RES = 1080
 
 YDL_OPTS = {
     'quiet': True,
     'writethumbnail': False,
+    'format': 'bestvideo[height<=1080]+bestaudio/best[height<=1080]',
     'outtmpl': f'{os.getcwd()}\\downloads{'/%(title)s.%(ext)s'}',
     'socket_timeout': 5,  # чтобы снизить уровень вывода
     'allow_multiple_video_streams': True,
     'retries': 20,
     'fragment_retries': 10,
+    'ffmpeg_location': f'{os.getcwd()}\\ffmpeg'
 }
 
 class MainWindow(QMainWindow):

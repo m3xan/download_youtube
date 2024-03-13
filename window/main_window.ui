@@ -7,11 +7,15 @@
     <x>0</x>
     <y>0</y>
     <width>499</width>
-    <height>468</height>
+    <height>386</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Downloader</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../icon/resource.qrc">
+    <normaloff>:/icon/YouTube_full-color_icon__2017_.ico</normaloff>:/icon/YouTube_full-color_icon__2017_.ico</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -73,6 +77,8 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="../icon/resource.qrc"/>
+ </resources>
  <connections/>
 </ui>
