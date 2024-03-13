@@ -12,6 +12,7 @@ def main() -> None:
     Проверяет наличие файлов для загрузки и 
     открывает приложение
     """
+    # TODO добавить настройки, добавление resource, пеерписать не используя pop
     app = QApplication(sys.orig_argv)
     window = MainWindow()
     window.show()
