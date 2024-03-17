@@ -4,32 +4,55 @@
 
 import os
 import re
-from typing import Generator
+import subprocess
+import concurrent
+from concurrent.futures import ProcessPoolExecutor
 
-def ui_file_directory(path: str) -> Generator[str, None, None]:
-    """
-    Возвращает все файлы в директории с .ui
-    """
+
+PATHS = [
+    'window'
+]
+
+def find_ui_file(path: str):
+    """Находит .ui файл в директории"""
     files = os.listdir(path)
     pattern = re.compile(r'.*\.ui')
-    for it in files:
-        if pattern.match(it):
-            yield it
+    for file in files:
+        if pattern.match(file):
+            return file
+    return None
 
-def generate_class_ui_to_py(path: str):
+def generate_class_ui2py(path: str):
     """
-    Генерирует из ui в py все файлы в директории
+    Заглушка
     """
-    for file in ui_file_directory(path):
-        file_path = os.path.join(path, file)
+    ui_file = find_ui_file(path)
+    if ui_file is None:
+        print('В директории файла нет')
+    else:
+        file_path: str = os.path.join(path, find_ui_file(path))
         file_name_without_extension = file_path.split(os.sep)[-1].removesuffix('.ui')
         cmd = f'pyside6-uic {file_path} -o {path}{os.sep}{file_name_without_extension}_class.py'
-        os.popen(cmd)
-        print('Успешная генерация файла')
+        try:
+            subprocess.run(
+                cmd, shell=True, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, encoding='utf-8'
+            )
+            print('Успешная генерация файла')
+            return f'{path}{os.sep}{file_name_without_extension}_class.py'
+        except subprocess.CalledProcessError as e:
+            print('Ошибка при генерации файла')
+            raise e
+    return None
+
+def generate_window_wisout_changes(paths: list):
+    """делает файлики окон из директорий"""
+    with ProcessPoolExecutor() as executor:
+        futures = {executor.submit(generate_class_ui2py, path): path for path in paths}
+        for future in concurrent.futures.as_completed(futures):
+            try:
+                future.result()
+            except Exception as e:
+                raise e
 
 if __name__ == '__main__':
-    window_paths = [
-       f'{os.getcwd()}\\window'
-    ]
-    for path in window_paths:
-        generate_class_ui_to_py(path)
+    generate_window_wisout_changes(PATHS)
