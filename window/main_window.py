@@ -6,23 +6,16 @@ import yt_dlp
 from PIL import Image
 from PySide6.QtCore import Qt
 
-from PySide6.QtCore import QThread, Signal, QObject
+from PySide6.QtCore import QThread, Signal
 from window.second_window.download.download import DownLoadDialog
 
 from window.main_window_class import Ui_MainWindow, QMainWindow, QPixmap
-
-# def my_hook(d):
-#     if d['status'] == 'finished':
-#         pass
-#     elif d['status'] == 'downloading':
-#         return d["downloaded_bytes"], d["total_bytes"]
-
 
 YDL_OPTS = {
     'quiet': True,
     'writethumbnail': False,
     'format': 'bestvideo[height<=1080]+bestaudio/best[height<=1080]',
-    'outtmpl': f'downloads{'/%(title)s.%(ext)s'}',
+    'outtmpl': 'downloads{/%(title)s.%(ext)s}',
     'socket_timeout': 5,  # чтобы снизить уровень вывода
     'allow_multiple_video_streams': True,
     'retries': 20,
