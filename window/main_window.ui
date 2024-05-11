@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>499</width>
-    <height>386</height>
+    <width>443</width>
+    <height>343</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,6 +19,23 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <item row="1" column="0" colspan="2">
+     <widget class="QLabel" name="label_image">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0" colspan="2">
+     <widget class="QLineEdit" name="line_edit_url">
+      <property name="placeholderText">
+       <string>Insert video url her</string>
+      </property>
+     </widget>
+    </item>
     <item row="3" column="0">
      <widget class="QPushButton" name="push_button_download">
       <property name="text">
@@ -26,50 +43,17 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="0" colspan="3">
-     <widget class="QLabel" name="label_image">
+    <item row="0" column="0">
+     <widget class="QPushButton" name="push_button_settings">
       <property name="text">
-       <string/>
+       <string>settings</string>
+      </property>
+      <property name="autoDefault">
+       <bool>true</bool>
       </property>
      </widget>
-    </item>
-    <item row="1" column="0" colspan="3">
-     <widget class="QLabel" name="label_2">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="text">
-       <string>Insert video url her</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0" colspan="3">
-     <widget class="QLineEdit" name="line_edit_url"/>
     </item>
    </layout>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>499</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menusettings">
-    <property name="title">
-     <string>Settings</string>
-    </property>
-    <addaction name="action_path"/>
-   </widget>
-   <addaction name="menusettings"/>
   </widget>
   <action name="action_path">
    <property name="text">

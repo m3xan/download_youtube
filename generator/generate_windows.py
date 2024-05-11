@@ -5,12 +5,14 @@
 import os
 import re
 import subprocess
+import threading
 import concurrent
 from concurrent.futures import ProcessPoolExecutor
 
 
-PATHS = [
-    'window'
+WINDOW_PATH = [
+    'window',
+    'window\\second_window\\download'
 ]
 
 def find_ui_file(path: str):
@@ -44,6 +46,21 @@ def generate_class_ui2py(path: str):
             raise e
     return None
 
+def generate_resource_rc():
+    """
+    Переделать
+    Заглушка
+    """
+    command = 'pyside6-rcc icon\\resource.qrc -o icon\\resource_rc.py'
+    try:
+        subprocess.run(
+            command, shell=True, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, encoding='utf-8'
+        )
+        print('Успешная генерация файла ресурсов')
+    except subprocess.CalledProcessError as e:
+        print('Ошибка при генерации файла ресурсов:')
+        raise e
+
 def generate_window_wisout_changes(paths: list):
     """делает файлики окон из директорий"""
     with ProcessPoolExecutor() as executor:
@@ -54,5 +71,17 @@ def generate_window_wisout_changes(paths: list):
             except Exception as e:
                 raise e
 
+def generate_all():
+    threads = [
+        threading.Thread(target=generate_window_wisout_changes, args=(WINDOW_PATH,)),
+        threading.Thread(target=generate_resource_rc)
+    ]
+
+    for thread in threads:
+        thread.start()
+
+    for thread in threads:
+        thread.join()
+
 if __name__ == '__main__':
-    generate_window_wisout_changes(PATHS)
+    generate_all()
