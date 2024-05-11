@@ -72,7 +72,7 @@ class DownLoadThread(QThread):
             'quiet': True,
             'writethumbnail': False,
             'format': 'bestvideo[height<=1080]+bestaudio/best[height<=1080]',
-            'outtmpl': f'downloads{'/%(title)s.%(ext)s'}',
+            'outtmpl': 'downloads{/%(title)s.%(ext)s}',
             'socket_timeout': 5,  # чтобы снизить уровень вывода
             'allow_multiple_video_streams': True,
             'retries': 20,
